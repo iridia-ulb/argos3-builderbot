@@ -1,3 +1,6 @@
 # ARGoS3 BuilderBot
 
-This repository contains ARGoS3 plugins for the BuilderBot hardware.
+This repository contains the ARGoS3 plugin for the BuilderBot hardware.
+
+
+

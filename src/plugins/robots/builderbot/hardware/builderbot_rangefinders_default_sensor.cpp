@@ -9,7 +9,7 @@
 #include <argos3/core/utility/logging/argos_log.h>
 #include <argos3/core/utility/configuration/argos_configuration.h>
 
-#include <argos3/plugins/robots/builderbot/hardware/builderbot.h>
+#include <argos3/plugins/robots/builderbot/hardware/robot.h>
 
 #include <iio.h>
 
@@ -44,8 +44,8 @@ namespace argos {
       try {
          CCI_BuilderBotRangefindersSensor::Init(t_tree);
          /* Get context and trigger */
-         iio_context* psContext = CBuilderBot::GetInstance().GetContext();
-         iio_device* psUpdateTrigger = CBuilderBot::GetInstance().GetSensorUpdateTrigger();
+         iio_context* psContext = CRobot::GetInstance().GetContext();
+         iio_device* psUpdateTrigger = CRobot::GetInstance().GetSensorUpdateTrigger();
          /* Parse the device name and channel names */
          std::string strDevice, strLeft, strRight;
          GetNodeAttribute(t_tree, "device", strDevice);

@@ -5,7 +5,7 @@
  */
 
 #include <argos3/core/utility/logging/argos_log.h>
-#include <argos3/plugins/robots/builderbot/hardware/builderbot.h>
+#include <argos3/plugins/robots/builderbot/hardware/robot.h>
 
 #include "builderbot_lift_system_default_sensor.h"
 
@@ -61,8 +61,8 @@ namespace argos {
    void CBuilderBotLiftSystemDefaultSensor::Init(TConfigurationNode& t_tree) {
       try {
          CCI_BuilderBotLiftSystemSensor::Init(t_tree);
-         iio_context* psContext = CBuilderBot::GetInstance().GetContext();
-         iio_device* psUpdateTrigger = CBuilderBot::GetInstance().GetSensorUpdateTrigger();
+         iio_context* psContext = CRobot::GetInstance().GetContext();
+         iio_device* psUpdateTrigger = CRobot::GetInstance().GetSensorUpdateTrigger();
          /* Parse the device name and channel names */
          std::string strDevice, strDistance, strTopLimitSwitch, strBottomLimitDistance, strState;
          GetNodeAttribute(t_tree, "device", strDevice);

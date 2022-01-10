@@ -1,21 +1,17 @@
 <?xml version="1.0" ?>
 <argos-configuration>
 
-  <!-- General configuration -->
   <framework>
     <experiment length="0" ticks_per_second="5" random_seed="0"/>
   </framework>
 
-  <!-- Controller -->
   <controllers>
-    <lua_controller id="test_rangefinders">
+    <lua_controller id="test_system">
       <actuators />
       <sensors>
-        <builderbot_rangefinders
-          implementation="default"
-          device="vcnl4000" />
+        <builderbot_system implementation="default" />
       </sensors>
-      <params script="/usr/share/argos3/testing/test_rangefinders.lua"/>
+      <params script="@CMAKE_INSTALL_PREFIX@/share/argos3/testing/test_system.lua" />
     </lua_controller>
   </controllers>
 

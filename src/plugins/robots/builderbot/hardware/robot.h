@@ -1,16 +1,16 @@
 /**
- * @file <argos3/plugins/robots/builderbot/hardware/builderbot.h>
+ * @file <argos3/plugins/robots/builderbot/hardware/robot.h>
  *
  * @author Michael Allwright - <allsey87@gmail.com>
  */
 
-#ifndef BUILDERBOT_H
-#define BUILDERBOT_H
+#ifndef ROBOT_H
+#define ROBOT_H
 
 namespace argos {
-   class CLuaController;
    class CPhysicalSensor;
    class CPhysicalActuator;
+   class CCI_Controller;
 }
 
 struct iio_context;
@@ -19,34 +19,33 @@ struct iio_device;
 #include <argos3/core/utility/math/rng.h>
 #include <argos3/core/utility/networking/tcp_socket.h>
 #include <argos3/core/utility/configuration/argos_configuration.h>
-#include <argos3/plugins/robots/generic/hardware/robot.h>
+
 
 namespace argos {
 
-   class CBuilderBot : public CRobot {
+   class CRobot {
 
    public:
-      static CBuilderBot& GetInstance() {
-         static CBuilderBot cBuilderBot;
-         return cBuilderBot;
+
+      static CRobot& GetInstance() {
+         static CRobot cRobot;
+         return cRobot;
       }
+
+      void Init(TConfigurationNode& t_controller,
+                const std::string& str_controller_id,
+                const std::string& str_router_addr,
+                UInt32 un_ticks_per_sec,
+                UInt32 un_length);
+
+      void Execute();
+
+      void Destroy();
 
       void SetSignal(int n_signal) {
          m_bSignalRaised = true;
          m_strSignal = ::strsignal(n_signal);
       }
-
-      void Init(TConfigurationNode& t_tree,
-                const std::string& str_controller_id);
-
-      void Destroy();
-
-      void InitFramework(TConfigurationNode& t_tree);
-
-      void InitController(TConfigurationNode& t_tree,
-                          const std::string& str_controller_id);
-
-      void Execute();
 
       iio_context* GetContext() {
          return m_psContext;
@@ -64,35 +63,47 @@ namespace argos {
          return m_unTicksPerSec;
       }
 
+      CTCPSocket& GetSocket() {
+         return m_cSocket;
+      }
+
    private:
 
-      CBuilderBot() :
+      CRobot() :
          m_bSignalRaised(false),
-         m_pcRNG(nullptr),
          m_unTicksPerSec(0),
+         m_unLength(0),
          m_pcController(nullptr),
          m_psContext(nullptr),
          m_psSensorUpdateTrigger(nullptr),
          m_psActuatorUpdateTrigger(nullptr) {}
 
-      virtual ~CBuilderBot() {}
+      virtual ~CRobot() {}
 
    private:
+
       /* signal handling variables */
       bool m_bSignalRaised;
       std::string m_strSignal;
-      /* pointer to the RNG */
-      CRandom::CRNG* m_pcRNG;
+
       /* target tick length for the controller */
       UInt32 m_unTicksPerSec;
+
       /* number of ticks to run */
       UInt32 m_unLength;
+
       /* pointer to the controller */
-      CLuaController* m_pcController;
+      CCI_Controller* m_pcController;
+
+      /* connection to the message router */
+      CTCPSocket m_cSocket;
+
       /* the vector of actuators */
       std::vector<CPhysicalActuator*> m_vecActuators;
+
       /* the vector of sensors */
       std::vector<CPhysicalSensor*> m_vecSensors;
+
       /* triggers for updating the sensors and actuators */
       iio_context* m_psContext;
       iio_device* m_psSensorUpdateTrigger;

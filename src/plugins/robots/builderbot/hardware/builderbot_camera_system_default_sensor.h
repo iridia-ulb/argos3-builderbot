@@ -29,7 +29,7 @@ struct media_device;
 #include <argos3/core/utility/math/vector2.h>
 #include <argos3/core/utility/math/vector3.h>
 
-#include <argos3/plugins/robots/generic/hardware/sensor.h>
+#include <argos3/plugins/robots/builderbot/hardware/sensor.h>
 #include <argos3/plugins/robots/builderbot/control_interface/ci_builderbot_camera_system_sensor.h>
 
 #include <linux/videodev2.h>

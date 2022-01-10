@@ -13,7 +13,7 @@
 #include <cstring>
 
 #include <argos3/core/utility/logging/argos_log.h>
-#include <argos3/plugins/robots/builderbot/hardware/builderbot.h>
+#include <argos3/plugins/robots/builderbot/hardware/robot.h>
 
 namespace argos {
 
@@ -53,8 +53,8 @@ namespace argos {
    void CBuilderBotElectromagnetSystemDefaultActuator::Init(TConfigurationNode& t_tree) {
       try {
          CCI_BuilderBotElectromagnetSystemActuator::Init(t_tree);
-         iio_context* psContext = CBuilderBot::GetInstance().GetContext();
-         iio_device* psUpdateTrigger = CBuilderBot::GetInstance().GetActuatorUpdateTrigger();
+         iio_context* psContext = CRobot::GetInstance().GetContext();
+         iio_device* psUpdateTrigger = CRobot::GetInstance().GetActuatorUpdateTrigger();
 
          /* Parse the device name and channel names */
          std::string strDevice, strMode;

@@ -11,7 +11,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/ARGoSBuildOptions.cmake)
 #
 # Project name
 #
-project(argos3_${ARGOS_BUILD_FOR})
+project(argos3_builderbot)
 
 #
 # Set the path additional cmake files must be searched for
