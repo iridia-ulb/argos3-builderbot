@@ -9,6 +9,7 @@ set(ARGOS3_HEADERS_PLUGINS_ROBOTS_BUILDERBOT_HARDWARE
   hardware/builderbot_differential_drive_default_sensor.h
   hardware/builderbot_electromagnet_system_default_actuator.h
   hardware/builderbot_electromagnet_system_default_sensor.h
+  hardware/builderbot_leds_default_actuator.h
   hardware/builderbot_lift_system_default_actuator.h
   hardware/builderbot_lift_system_default_sensor.h
   hardware/builderbot_system_default_sensor.h
@@ -30,6 +31,7 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_BUILDERBOT
   hardware/builderbot_differential_drive_default_sensor.cpp
   hardware/builderbot_electromagnet_system_default_actuator.cpp
   hardware/builderbot_electromagnet_system_default_sensor.cpp
+  hardware/builderbot_leds_default_actuator.cpp
   hardware/builderbot_lift_system_default_actuator.cpp
   hardware/builderbot_lift_system_default_sensor.cpp
   hardware/builderbot_system_default_sensor.cpp
@@ -50,11 +52,6 @@ target_link_libraries(argos3 stdc++fs
   ${MEDIACTL_LIBRARY}
   ${V4L2SUBDEV_LIBRARY})
   
-# Install executable and header files
-install(TARGETS argos3
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib/argos3
-  ARCHIVE DESTINATION lib/argos3)
 # Install executable and header files
 install(TARGETS argos3
   RUNTIME DESTINATION bin

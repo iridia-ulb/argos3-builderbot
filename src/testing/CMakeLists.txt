@@ -8,14 +8,14 @@ configure_file(
   install(FILES ${CMAKE_BINARY_DIR}/testing/test_system.lua DESTINATION share/argos3/testing)
   install(FILES ${CMAKE_BINARY_DIR}/testing/test_system.argos DESTINATION share/argos3/testing)
 # leds test
-#configure_file(
-#  ${CMAKE_SOURCE_DIR}/testing/test_leds.argos.in
-#  ${CMAKE_BINARY_DIR}/testing/test_leds.argos)
-#configure_file(
-#  ${CMAKE_SOURCE_DIR}/testing/test_leds.lua
-#  ${CMAKE_BINARY_DIR}/testing/test_leds.lua)
-#  install(FILES ${CMAKE_BINARY_DIR}/testing/test_leds.lua DESTINATION share/argos3/testing)
-#  install(FILES ${CMAKE_BINARY_DIR}/testing/test_leds.argos DESTINATION share/argos3/testing)
+configure_file(
+  ${CMAKE_SOURCE_DIR}/testing/test_leds.argos.in
+  ${CMAKE_BINARY_DIR}/testing/test_leds.argos)
+configure_file(
+  ${CMAKE_SOURCE_DIR}/testing/test_leds.lua
+  ${CMAKE_BINARY_DIR}/testing/test_leds.lua)
+  install(FILES ${CMAKE_BINARY_DIR}/testing/test_leds.lua DESTINATION share/argos3/testing)
+  install(FILES ${CMAKE_BINARY_DIR}/testing/test_leds.argos DESTINATION share/argos3/testing)
 # differential drive test
 configure_file(
   ${CMAKE_SOURCE_DIR}/testing/test_differential_drive.argos.in
