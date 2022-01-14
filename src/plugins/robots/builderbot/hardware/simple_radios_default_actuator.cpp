@@ -15,6 +15,11 @@ namespace argos {
    /****************************************/
    /****************************************/
 
+   const std::string CSimpleRadiosDefaultActuator::NFC_DEVICE_PATH("/dev/nfc");
+
+   /****************************************/
+   /****************************************/
+
    void CSimpleRadiosDefaultActuator::Init(TConfigurationNode& t_tree) {
       try {
          /* Parent class init */
@@ -22,7 +27,8 @@ namespace argos {
          if(!CRobot::GetInstance().GetSocket().IsConnected()) {
             LOGERR << "[WARNING] Robot is not connected to a router" << std::endl;
          }
-         m_vecInterfaces.emplace_back("wifi");
+         m_vecInterfaces.emplace_back("wifi"); // 0
+         m_vecInterfaces.emplace_back("nfc"); // 1
       }
       catch(CARGoSException& ex) {
          THROW_ARGOSEXCEPTION_NESTED("Error initializing the radio default actuator", ex);
@@ -34,7 +40,7 @@ namespace argos {
    /****************************************/
 
    void CSimpleRadiosDefaultActuator::Update() {
-      /* send messages if the socket is connected */
+      /* send wifi messages if the socket is connected */
       if(CRobot::GetInstance().GetSocket().IsConnected()) {
          for(const CByteArray& c_message : m_vecInterfaces[0].Messages) {
             CRobot::GetInstance().GetSocket().SendByteArray(c_message);
@@ -42,6 +48,12 @@ namespace argos {
          /* Flush data from the control interface */
          m_vecInterfaces[0].Messages.clear();
       }
+      /* send nfc messages */
+      for(const CByteArray& c_message : m_vecInterfaces[1].Messages) {
+         std::ofstream cStream(NFC_DEVICE_PATH, std::ofstream::binary);
+         cStream.write(reinterpret_cast<const char*>(c_message.ToCArray()), c_message.Size());
+      }
+      m_vecInterfaces[1].Messages.clear();
    }
 
    /****************************************/
@@ -49,6 +61,7 @@ namespace argos {
 
    void CSimpleRadiosDefaultActuator::Reset() {
       m_vecInterfaces[0].Messages.clear();
+      m_vecInterfaces[1].Messages.clear();
    }
 
    /****************************************/
@@ -59,7 +72,8 @@ namespace argos {
                      "Michael Allwright [allsey87@gmail.com]",
                      "1.0",
                      "Hardware implementation of the simple radio actuator.",
-                     "This actuator sends messages to other robots using the local network.",
+                     "This actuator sends messages to other robots using the local network\n"
+                     "and the BuilderBot's NFC interface.",
                      "Usable"
    );
 

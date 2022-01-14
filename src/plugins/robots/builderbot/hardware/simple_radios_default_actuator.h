@@ -32,6 +32,10 @@ namespace argos {
 
       virtual void Reset();
 
+   private:
+
+      static const std::string NFC_DEVICE_PATH;
+
    };
 }
 

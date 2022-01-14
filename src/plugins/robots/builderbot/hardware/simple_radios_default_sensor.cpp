@@ -15,7 +15,7 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   void CRadiosDefaultSensor::Init(TConfigurationNode& t_tree) {
+   void CSimpleRadiosDefaultSensor::Init(TConfigurationNode& t_tree) {
       try {
          /* Parent class init */
          CCI_SimpleRadiosSensor::Init(t_tree);

@@ -38,8 +38,8 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_BUILDERBOT
   hardware/builderbot_rangefinders_default_sensor.cpp
   hardware/main.cpp
   hardware/robot.cpp
-  hardware/simple_radios_default_actuator.h
-  hardware/simple_radios_default_sensor.h)
+  hardware/simple_radios_default_actuator.cpp
+  hardware/simple_radios_default_sensor.cpp)
 
 # Create an executable for the robot
 add_executable(argos3 ${ARGOS3_SOURCES_PLUGINS_ROBOTS_BUILDERBOT})
