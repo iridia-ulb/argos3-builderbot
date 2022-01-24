@@ -25,7 +25,7 @@ namespace argos {
          m_vecInterfaces.emplace_back("wifi");
       }
       catch(CARGoSException& ex) {
-         THROW_ARGOSEXCEPTION_NESTED("Error initializing the wifi default sensor", ex);
+         THROW_ARGOSEXCEPTION_NESTED("Error initializing the simple radios default sensor", ex);
       }
    }
 

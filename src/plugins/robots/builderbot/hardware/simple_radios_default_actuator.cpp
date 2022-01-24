@@ -31,7 +31,7 @@ namespace argos {
          m_vecInterfaces.emplace_back("nfc"); // 1
       }
       catch(CARGoSException& ex) {
-         THROW_ARGOSEXCEPTION_NESTED("Error initializing the radio default actuator", ex);
+         THROW_ARGOSEXCEPTION_NESTED("Error initializing the simple radios default actuator", ex);
       }
    }
 
